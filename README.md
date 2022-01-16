@@ -13,7 +13,7 @@ yarn add 'https://github.com/hellohublot/react-native-selected-page.git'
 ```
 
 ```javascript
-import { HTPageManager } from 'react-native-selected-page'
+import { HTPageHeaderView, HTPageContentView, HTPageManager, HTSelectedLabel } from 'react-native-selected-page'
 
 this.pageManager = new HTPageManager([
 	{ title: '你好', backgroundColor: 'skyblue' },

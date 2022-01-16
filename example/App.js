@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { HTSelectedLabel, HTPageHeaderView, HTPageContentView, HTPageManager } from 'react-native-selected-page'
+import { HTPageHeaderView, HTPageContentView, HTPageManager, HTSelectedLabel } from 'react-native-selected-page'
 
 class App extends Component {
 

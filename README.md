@@ -37,7 +37,7 @@ let Content = this.pageManager.renderContentView
 	cursorStyle={{ width: 15, height: 2, borderRadius: 1, backgroundColor: 'orange' }}
 />
 <Content 
-	initScrollIndex={this.props.initScrollIndex}
+	initScrollIndex={ 0 }
 	renderItem={({item, index}) => {
 	return (
 		<View style={{ flex: 1, backgroundColor: item.backgroundColor }}>

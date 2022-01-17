@@ -14,6 +14,7 @@
   "dependencies": {
     "react": "17.0.2",
     "react-native": "0.66.0",
+    "react-native-pager-view": "5.4.0",
     "react-native-selected-page": "../"
   },
   "devDependencies": {

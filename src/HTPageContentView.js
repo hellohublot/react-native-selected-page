@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList, Platform, Animated, Dimensions } from 'react-native'
-import ViewPager from '@react-native-community/viewpager'
+import ViewPager from 'react-native-pager-view'
 import PropTypes from 'prop-types'
 
 const SCREEN_WIDTH = Dimensions.get('window').width

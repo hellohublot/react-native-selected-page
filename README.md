@@ -9,7 +9,7 @@
 [点击查看完整示例 Example](./example/App.js)
 
 ```bash
-yarn add 'https://github.com/hellohublot/react-native-selected-page.git'
+yarn add 'react-native-pager-view@5.4.0' 'https://github.com/hellohublot/react-native-selected-page.git'
 ```
 
 ```javascript

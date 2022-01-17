@@ -1184,11 +1184,6 @@
   resolved "https://registry.nlark.com/@react-native-community/eslint-plugin/download/@react-native-community/eslint-plugin-1.1.0.tgz#e42b1bef12d2415411519fd528e64b593b1363dc"
   integrity sha1-5Csb7xLSQVQRUZ/VKOZLWTsTY9w=
 
-"@react-native-community/viewpager@^3.0.0":
-  version "3.3.1"
-  resolved "https://registry.npmmirror.com/@react-native-community/viewpager/download/@react-native-community/viewpager-3.3.1.tgz#c2c530fb99653252a4272c8cf1bb85dbd1edf57d"
-  integrity sha1-wsUw+5llMlKkJyyM8buF29Ht9X0=
-
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.nlark.com/@react-native/assets/download/@react-native/assets-1.0.0.tgz#c6f9bf63d274bafc8e970628de24986b30a55c8e"
@@ -5381,10 +5376,13 @@ react-native-codegen@^0.0.7:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
+react-native-pager-view@5.4.0:
+  version "5.4.0"
+  resolved "https://registry.npmmirror.com/react-native-pager-view/download/react-native-pager-view-5.4.0.tgz#8e30a391a68da26e59f4ae724341b9208924b2ee"
+  integrity sha1-jjCjkaaNom5Z9K5yQ0G5IIkksu4=
+
 react-native-selected-page@../:
   version "1.0.0"
-  dependencies:
-    "@react-native-community/viewpager" "^3.0.0"
 
 react-native@0.66.0:
   version "0.66.0"

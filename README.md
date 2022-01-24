@@ -18,9 +18,9 @@ import { HTPageHeaderView, HTPageContentView, HTPageManager, HTSelectedLabel } f
 this.pageManager = new HTPageManager([
 	{ title: '你好', backgroundColor: 'skyblue' },
 	{ title: '世界', backgroundColor: 'coral' },
-	{ title: '骑单车', backgroundColor: 'salmon' },
+	{ title: '骑单车', backgroundColor: 'pink' },
 	{ title: '晒太阳', backgroundColor: 'turquoise' },
-	{ title: '喝热水', backgroundColor: 'pink' },
+	{ title: '喝热水', backgroundColor: 'salmon' },
 ])
 
 let Header = this.pageManager.renderHeaderView

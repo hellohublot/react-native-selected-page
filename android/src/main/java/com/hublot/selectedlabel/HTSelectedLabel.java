@@ -3,7 +3,6 @@ package com.hublot.selectedlabel;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -57,7 +56,6 @@ public class HTSelectedLabel extends TextView {
         if (fontSize != getTextSize()) {
             Typeface typeface = ReactFontManager.getInstance().getTypeface(this.fontFamily, this.fontStyle, this.fontWeight, getContext().getAssets());
             setTypeface(typeface);
-            setTextSize(fontSize);
         }
         float scale = 1;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

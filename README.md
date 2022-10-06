@@ -1,12 +1,14 @@
-- 纯原生动画的导航栏, 文字放大, 文字颜色渐变和下面滚动条, 都是 Animated.Value + Animated.Event 原生动画
-- 可以单独拆开使用, 比如 Header 和 Content 和 SelectedLabel 都可以单独使用
-- 可以自定义每个 header.item
+## Features
+
+- The pure native animation navigation bar, text size change, text color change and separator scroll bar both are Animated.Value + Animated.Event native animations
+- Can be used separately, such as Header and Content and SelectedLabel can be used separately
+- Each header.item can be customized
 
 <img src="./example/1.gif" width="300">
 
 ## Usage
 
-[点击查看完整示例 Example](./example/App.js)
+[Example](./example/App.js)
 
 ```bash
 yarn add 'https://github.com/hellohublot/react-native-selected-page.git'

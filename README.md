@@ -18,11 +18,11 @@ yarn add 'https://github.com/hellohublot/react-native-selected-page.git'
 import { HTPageHeaderView, HTPageContentView, HTPageManager, HTSelectedLabel } from 'react-native-selected-page'
 
 this.pageManager = new HTPageManager([
-	{ title: '你好', backgroundColor: 'skyblue' },
-	{ title: '世界', backgroundColor: 'coral' },
-	{ title: '骑单车', backgroundColor: 'pink' },
-	{ title: '晒太阳', backgroundColor: 'turquoise' },
-	{ title: '喝热水', backgroundColor: 'salmon' },
+	{ title: 'hello', backgroundColor: 'skyblue' },
+	{ title: 'world', backgroundColor: 'coral' },
+	{ title: 'ride bike', backgroundColor: 'pink' },
+	{ title: 'sunbathing', backgroundColor: 'turquoise' },
+	{ title: 'drink', backgroundColor: 'salmon' },
 ])
 
 let Header = this.pageManager.renderHeaderView

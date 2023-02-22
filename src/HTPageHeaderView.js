@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Platform, Animated, Easing, LayoutAnimation, PixelRatio } from 'react-native'
+import { View, Text, StyleSheet, Pressable, ScrollView, Platform, Animated, Easing, LayoutAnimation, PixelRatio } from 'react-native'
 import HTSelectedLabel from './HTSelectedLabel'
 import HTPageHeaderCursor from './HTPageHeaderCursor'
 
@@ -52,13 +52,13 @@ export default class HTPageHeaderView extends Component {
 		this.scrollPageIndexValue.removeAllListeners()
 	}
 
-	_animation = (key, value, duration, native) => {
+	_animation = (key, value, duration, native, complete) => {
 		Animated.timing(key, {
 			toValue: value,
 			duration: duration,
 			easing: Easing.inOut(Easing.ease),
 			useNativeDriver: native,
-		}).start()
+		}).start(complete)
 	}
 
 	_itemTitleProps = (item, index) => {
@@ -107,11 +107,11 @@ export default class HTPageHeaderView extends Component {
 	_renderItem = (item, index) => {
 		let content = this?.props?.renderItem != null ? this.props.renderItem(item, index) : this._renderTitle(item, index)
 		return (
-			<TouchableOpacity key={index} style={this.itemContainerStyle} onLayout={(event) => this.cursor?._onLayoutItemContainer(event, item, index)} onPress={() => this._itemDidTouch(item, index)}>
+			<Pressable key={index} style={this.itemContainerStyle} onLayout={(event) => this.cursor?._onLayoutItemContainer(event, item, index)} onPress={() => this._itemDidTouch(item, index)}>
 			{
 				content
 			}
-			</TouchableOpacity>
+			</Pressable>
 		)
 	}
 
@@ -132,6 +132,9 @@ export default class HTPageHeaderView extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
+		if (nextProps.data != this.props.data) {
+			return true
+		}
 		return false
 	}
 

@@ -23,6 +23,7 @@ export default class HTPagContentView extends Component {
 		automaticallyAdjustContentInsets: false,
 		bounces: false,
 		pagingEnabled: true,
+		keyExtractor: (item, index) => index
 	}
 
 	constructor(props) {
@@ -58,10 +59,8 @@ export default class HTPagContentView extends Component {
 	}
 
 	_renderItem = (item, index, useViewPager = false) => {
-		let keyExtractor = this.props.keyExtractor ?? ((item, index) => index)
-		let key = keyExtractor(item, index)
 		return (
-			<View key={key} style={{ width: this.scrollViewWidth(), height: '100%' }}>
+			<View style={{ width: this.scrollViewWidth(), height: '100%' }}>
 			{
 				this.props.renderItem({ item, index })
 			}

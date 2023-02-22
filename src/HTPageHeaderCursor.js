@@ -25,15 +25,6 @@ export default class HTPageHeaderCursor extends Component {
 		}
 	}
 
-
-
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		if (nextProps.data != this.props.data) {
-			this.itemContainerLayoutList = props.data.map(item => false)
-			this.forceUpdate()
-		}
-	}
-
 	_findFixCursorWidth = () => {
 		return this.props?.cursorStyle?.width
 	}
@@ -64,6 +55,14 @@ export default class HTPageHeaderCursor extends Component {
 			inputRange: rangeList(true),
 			outputRange: rangeList(false),
 		})
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		if (nextProps.data != this.props.data) {
+			this.itemContainerLayoutList = nextProps.data.map(item => false)
+			return true
+		}
+		return false
 	}
 
 	render() {

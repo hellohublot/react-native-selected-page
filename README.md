@@ -1,5 +1,5 @@
 ## react-native-selected-page
-react-native-selected-page is a lightweight react-native tab menu library, It supports animated fading and font scaling, and it uses native animations and gestures, so it can give you the best performance experience as native apps
+react-native-selected-page is a light-weight react-native tab menu library, It supports animated fading and font scaling, and it uses native animations and gestures, so it can give you the best performance experience as native apps
 
 <img src="./example/1.gif" width="300">
 

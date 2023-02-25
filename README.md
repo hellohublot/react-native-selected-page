@@ -6,9 +6,9 @@ react-native-selected-page is a light-weight react-native tab menu library, It s
 ## Features
 
 - [x] Support label animation fading and font scaling, making user operations smoother
-- [x] Supports progress bars that follow animation and size adaptation
+- [x] Support progress bars that follow animation and size adaptation
 - [x] Support independent use, you can use Header alone, or float Header, or animation fading Label
-- [x] Supports high customization
+- [x] Support high customization
 
 ## Install
 

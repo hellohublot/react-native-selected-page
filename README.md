@@ -1,18 +1,24 @@
-## Features
-
-- The pure native animation navigation bar, text size change, text color change and separator scroll bar both are Animated.Value + Animated.Event native animations
-- Can be used separately, such as Header and Content and SelectedLabel can be used separately
-- Each header.item can be customized
+## react-native-selected-page
+react-native-selected-page is a lightweight react-native tab menu library, It supports animated fading and font scaling, and it uses native animations and gestures, so it can give you the best performance experience as native apps
 
 <img src="./example/1.gif" width="300">
 
-## Usage
+## Features
 
-[Example](./example/App.js)
+- [x] Support label animation fading and font scaling, making user operations smoother
+- [x] Supports progress bars that follow animation and size adaptation
+- [x] Support independent use, you can use Header alone, or float Header, or animation fading Label
+- [x] Supports high customization
+
+## Install
 
 ```bash
 yarn add 'https://github.com/hellohublot/react-native-selected-page.git'
 ```
+
+## Usage
+
+[View Full Example](./example/App.js)
 
 ```javascript
 import { HTPageHeaderView, HTPageContentView, HTPageManager, HTSelectedLabel } from 'react-native-selected-page'
@@ -49,6 +55,6 @@ let Content = this.pageManager.renderContentView
 
 ```
 
-## Author
+## Contact
 
 hellohublot, hublot@aliyun.com

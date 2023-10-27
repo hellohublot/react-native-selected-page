@@ -5,7 +5,7 @@
 //  Created by hublot on 2020/11/2.
 //
 
-#import "RCTViewManager.h"
+#import <React/RCTViewManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

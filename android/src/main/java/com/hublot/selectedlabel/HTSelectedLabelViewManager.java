@@ -29,12 +29,12 @@ public class HTSelectedLabelViewManager extends SimpleViewManager<HTSelectedLabe
         return selectedLabel;
     }
 
-    @ReactProp(name = "normalColor")
+    @ReactProp(name = "normalColor", customType = "Color")
     public void setNormalColor(HTSelectedLabel view, int normalColor) {
         view.normalColor = normalColor;
     }
 
-    @ReactProp(name = "selectedColor")
+    @ReactProp(name = "selectedColor", customType = "Color")
     public void setSelectedColor(HTSelectedLabel view, int selectedColor) {
         view.selectedColor = selectedColor;
     }

@@ -18,12 +18,14 @@ export default class HTPageHeaderView extends Component {
 		itemTitleSelectedStyle: PropTypes.object,
 		cursorStyle: PropTypes.object,
 		onSelectedPageIndex: PropTypes.func,
+        selectedPageIndexDuration: PropTypes.number,
 		shouldSelectedPageIndex: PropTypes.func
 	}
 
 	static defaultProps = {
 		itemSpace: 0,
 		horizontal: true,
+        selectedPageIndexDuration: 250,
 		showsHorizontalScrollIndicator: false,
 		showsVerticalScrollIndicator: false,
 		contentInsetAdjustmentBehavior: 'never',
@@ -66,19 +68,21 @@ export default class HTPageHeaderView extends Component {
 		if (fontScale == 1) {
 			fontScale = 1.0001
 		}
-		let scale = this.scrollPageIndexValue.interpolate({
+		const scale = this.scrollPageIndexValue.interpolate({
             inputRange: [index - 2, index - 1, index, index + 1, index + 2],
             outputRange: [1, 1, fontScale, 1, 1]
         })
+        const normalColor = this.itemTitleNormalStyle.color
+        const selectedColor = this.itemTitleSelectedStyle.color
 		let titleStyle = {
-			...this?.props?.itemTitleStyle,
-			normalColor: this.itemTitleNormalStyle.color,
-			selectedColor: this.itemTitleSelectedStyle.color,
-			selectedScale: fontScale,
+			...this.itemTitleNormalStyle,
+            normalColor,
+            selectedColor,
+            selectedScale: fontScale,
 			text: this?.props?.titleFromItem ? this?.props?.titleFromItem(item, index) : item,
 			style: {
-				...this?.props?.itemTitleStyle,
-				transform: [{ scale }]
+				...this.itemTitleNormalStyle,
+				transform: [{ scale }],
 			},
 		}
 		return titleStyle
@@ -99,7 +103,7 @@ export default class HTPageHeaderView extends Component {
 			}
 		}
 		if (this.shouldHandlerAnimationValue) {
-			this._animation(this.scrollPageIndexValue, index, 250, true)
+			this._animation(this.scrollPageIndexValue, index, this.props.selectedPageIndexDuration, true)
 		}
 		this.props.onSelectedPageIndex(index)	
 	}

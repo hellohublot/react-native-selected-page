@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, Animated, Dimensions } from 'react-native'
+import { View, Animated, Dimensions } from 'react-native'
+import HTContentFlatList from './HTContentFlatList'
 import PropTypes from 'prop-types'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
-
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 export default class HTPagContentView extends Component {
 
@@ -16,7 +15,7 @@ export default class HTPagContentView extends Component {
 	static defaultProps = {
 		horizontal: true,
 		scrollEventThrottle: 1 / 60.0 * 1000,
-		initialNumToRender: 2,
+		initialNumToRender: 1,
 		showsHorizontalScrollIndicator: false,
 		showsVerticalScrollIndicator: false,
 		contentInsetAdjustmentBehavior: 'never',
@@ -76,9 +75,10 @@ export default class HTPagContentView extends Component {
 
 	render() {
 		return (
-			<AnimatedFlatList
+			<HTContentFlatList
 				{...this.props}
 				ref={ref => {
+                    console.log('99999', ref, ref?.scrollToIndex)
 					this._ref(ref)
 					this.props.scrollViewRef && this.props.scrollViewRef(ref)
 				}}
@@ -91,7 +91,7 @@ export default class HTPagContentView extends Component {
 					offset: index * this.scrollViewWidth(),
 					index
 				})}
-				contentOffset={{ x: (this.props?.initScrollIndex ?? 0) * this.scrollViewWidth(), y: 0 }}
+                scrollViewWidth={this.scrollViewWidth()}
 			/>
 		)
 	}

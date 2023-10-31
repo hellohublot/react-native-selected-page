@@ -10,6 +10,7 @@ export default class HTPagContentView extends Component {
 	static propTypes = {
 		data: PropTypes.array,
 		renderItem: PropTypes.func,
+        selectedPageIndexDuration: PropTypes.boolean,
 	}
 
 	static defaultProps = {
@@ -22,44 +23,56 @@ export default class HTPagContentView extends Component {
 		automaticallyAdjustContentInsets: false,
 		bounces: false,
 		pagingEnabled: true,
+        shouldSelectedPageAnimation: true,
 		keyExtractor: (item, index) => index
 	}
 
 	constructor(props) {
-		super(props)
-		let initScrollIndex = this.props.initScrollIndex ?? 0
-		this._contentOffsetValueX = new Animated.Value(initScrollIndex * this.scrollViewWidth())
-		this._layoutValueWidth = new Animated.Value(this.scrollViewWidth())
-		this.scrollPageIndexValue = Animated.divide(this._contentOffsetValueX, this._layoutValueWidth)
-		this.event = Animated.event([{
+        super(props)
+        this.state = {
+            scrollViewWidth: SCREEN_WIDTH
+        }
+        this._scrollViewWidthValue = new Animated.Value(SCREEN_WIDTH)
+
+        let initialScrollIndex = this.props.initialScrollIndex ?? 0
+        this._contentOffsetValueX = new Animated.Value(initialScrollIndex * this.state.scrollViewWidth)
+        this._scrollPageIndexValue = Animated.divide(this._contentOffsetValueX, this._scrollViewWidthValue)
+        this.event = Animated.event([{
             nativeEvent: {
-            	contentOffset: { x: this._contentOffsetValueX },
-            	layoutMeasurement: { width: this._layoutValueWidth }
+                contentOffset: { x: this._contentOffsetValueX },
+                layoutMeasurement: { width: this._scrollViewWidthValue }
             }
         }], {
             useNativeDriver: true
         })
-	}
+    }
 
-	componentDidMount() {
-		this.props.onInitScrollPageIndexValue && this.props.onInitScrollPageIndexValue(this.scrollPageIndexValue)
-	}
+    componentDidMount() {
+        this.props.onInitScrollPageIndexValue && this.props.onInitScrollPageIndexValue(this._scrollPageIndexValue)
+    }
 
-	scrollViewWidth = () => {
-		return this.props?.scrollViewWidth ?? SCREEN_WIDTH
-	}
+    scrollPageIndex = (pageIndex, animated = this.props.shouldSelectedPageAnimation) => {
+        try {
+            let scrollConfig = { index: pageIndex, animated: animated }
+            this?.scrollView?.scrollToIndex && this?.scrollView?.scrollToIndex(scrollConfig)
+        } catch(e) {
+        }
+    }
 
-	scrollPageIndex = (pageIndex, animated = true) => {
-		try {
-			let scrollConfig = { index: pageIndex, animated: animated }
-			this?.scrollView?.scrollToIndex && this?.scrollView?.scrollToIndex(scrollConfig)
-		} catch(e) {
-		}
-	}
+    _onLayout = ({ nativeEvent: { layout: { width } } }) => {
+        if (width != this.state.scrollViewWidth && width > 0) {
+            this._scrollViewWidthValue.setValue(width)
+            this.setState({ scrollViewWidth: width }, () => {
+                // only for web platform
+                this.scrollView.reloadScrollContainerWidth && this.scrollView.reloadScrollContainerWidth()
+            })
+        }
+    }
+	
 
 	_renderItem = (item, index, useViewPager = false) => {
 		return (
-			<View style={{ width: this.scrollViewWidth(), height: '100%' }}>
+			<View style={{ width: this.state.scrollViewWidth, height: '100%' }}>
 			{
 				this.props.renderItem({ item, index })
 			}
@@ -77,8 +90,8 @@ export default class HTPagContentView extends Component {
 		return (
 			<HTContentFlatList
 				{...this.props}
+                onLayout={this._onLayout}
 				ref={ref => {
-                    console.log('99999', ref, ref?.scrollToIndex)
 					this._ref(ref)
 					this.props.scrollViewRef && this.props.scrollViewRef(ref)
 				}}
@@ -87,11 +100,11 @@ export default class HTPagContentView extends Component {
 				renderItem={({item, index}) => this._renderItem(item, index)}
 				onScroll={this.event}
 				getItemLayout={(item, index) => ({
-					length: this.scrollViewWidth(),
-					offset: index * this.scrollViewWidth(),
+					length: this.state.scrollViewWidth,
+					offset: index * this.state.scrollViewWidth,
 					index
 				})}
-                scrollViewWidth={this.scrollViewWidth()}
+                scrollViewWidth={this.state.scrollViewWidth}
 			/>
 		)
 	}

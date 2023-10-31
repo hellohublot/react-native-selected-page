@@ -14,13 +14,15 @@ class App extends Component {
 
 	constructor(props) {
 		super(props)
-		this.pageManager = new HTPageManager([
-			{ title: '你好', backgroundColor: 'skyblue' },
-			{ title: '世界', backgroundColor: 'coral' },
-			{ title: '骑单车', backgroundColor: 'pink' },
-			{ title: '晒太阳', backgroundColor: 'turquoise' },
-			{ title: '喝热水', backgroundColor: 'salmon' },
-		])
+		this.pageManager = new HTPageManager({
+            data: [
+                { title: '你好', backgroundColor: 'skyblue' },
+                { title: '世界', backgroundColor: 'coral' },
+                { title: '骑单车', backgroundColor: 'pink' },
+                { title: '晒太阳', backgroundColor: 'turquoise' },
+                { title: '喝热水', backgroundColor: 'salmon' },
+            ]
+        })
 	}
 
 	render() {
@@ -31,7 +33,6 @@ class App extends Component {
 				<Header 
     				style={{ height: 50, backgroundColor: 'white', borderBottomColor: '#F5F5F5', borderBottomWidth: 1 }}
 					titleFromItem={ item => item.title }
-					initScrollIndex={ 0 }
 					itemContainerStyle={{ paddingHorizontal: 10, marginLeft: 10 }}
 					itemTitleStyle={{ fontSize: 17 }}
 					itemTitleNormalStyle={{ color: '#333' }}
@@ -39,7 +40,6 @@ class App extends Component {
 					cursorStyle={{ width: 15, height: 2, borderRadius: 1, backgroundColor: 'orange' }}
     			/>
     			<Content 
-    			initScrollIndex={this.props.initScrollIndex}
     			renderItem={({item, index}) => {
     				return (
     					<View style={{ flex: 1, backgroundColor: item.backgroundColor }}>

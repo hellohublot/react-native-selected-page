@@ -9,9 +9,14 @@ export default class HTContentFlatList extends Component {
         super(props)
         this.pageIndex = 0
         this.isDraging = false
+        this.hasScrolledToInitScrollIndex = false
+        const scrollEnabled = this.props?.scrollEnabled ?? true
         this.panResponder = PanResponder.create({
-            onMoveShouldSetPanResponder: () => true,
-            onMoveShouldSetPanResponderCapture: () => true,
+            onStartShouldSetPanResponder: () => scrollEnabled,
+            onShouldBlockNativeResponder: () => scrollEnabled,
+            onMoveShouldSetPanResponder: () => scrollEnabled,
+            onMoveShouldSetPanResponderCapture: () => scrollEnabled,
+            onPanResponderGrant: (_, gestureState) => this._onPanGestureStart(gestureState),
             onPanResponderMove: (_, gestureState) => this._onPanGestureMove(gestureState),
             onPanResponderTerminate: (_, gestureState) => this._onPanGestureEnd(gestureState),
             onPanResponderRelease: (_, gestureState) => this._onPanGestureEnd(gestureState),
@@ -19,8 +24,11 @@ export default class HTContentFlatList extends Component {
         })
     }
 
-    _onPanGestureMove = (gestureState) => {
+    _onPanGestureStart = (gestureState) => {
         this.isDraging = true
+    }
+
+    _onPanGestureMove = (gestureState) => {
         this.scrollView.scrollToOffset({ 
             animated: false, 
             offset: this.pageIndex * this.props.scrollViewWidth - gestureState.dx
@@ -33,7 +41,7 @@ export default class HTContentFlatList extends Component {
         decelerationDistance *= (gestureState.vx > 0 ? 1 : -1)
         const finallyDistance = decelerationDistance + gestureState.dx
         const reloadPageIndex = Math.abs(finallyDistance) * 2 >= this.props.scrollViewWidth ? this.pageIndex + (finallyDistance > 0 ? -1 : 1) : this.pageIndex
-        this.scrollView.scrollToIndex({ 
+        this.scrollToIndex({ 
             animated: true, 
             index: reloadPageIndex
         })
@@ -51,6 +59,21 @@ export default class HTContentFlatList extends Component {
 
     scrollToIndex = (config) => {
         this.scrollView.scrollToIndex(config)
+    }
+
+    reloadScrollContainerWidth = (width) => {
+        if (!this.hasScrolledToInitScrollIndex) {
+            this.hasScrolledToInitScrollIndex = true
+            this.scrollToIndex({ 
+                animated: false, 
+                index: this.props.initialScrollIndex
+            })
+        } else {
+            this.scrollToIndex({ 
+                animated: false, 
+                index: this.pageIndex
+            })
+        }
     }
 
     render() {

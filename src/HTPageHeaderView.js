@@ -35,8 +35,14 @@ export default class HTPageHeaderView extends Component {
 
 	constructor(props) {
 		super(props)
-		this.scrollPageIndexValue = new Animated.Value(this.props.initScrollIndex ?? 0)
+        const scrollPageIndex = this.props.initialScrollIndex ?? 0
+        this.scrollPageIndex = scrollPageIndex
+		this.scrollPageIndexValue = new Animated.Value(scrollPageIndex)
+        this.addScrollPageIndexListener()
 		this.shouldHandlerAnimationValue = true
+        this.itemConfigList = this.props.data.map(item => ({
+            _animtedEnabledValue: new Animated.Value(1)
+        }))
 		this.itemContainerStyle = { height: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...this.props.itemContainerStyle }
 		let itemTitleStyle = { fontSize: 15, color: '#666', ...this.props.itemTitleStyle }
 		this.itemTitleNormalStyle = { fontSize: 16, color: '#333', ...itemTitleStyle, ...this.props.itemTitleNormalStyle }
@@ -45,10 +51,18 @@ export default class HTPageHeaderView extends Component {
 	}
 
 	bindScrollPageIndexValue = (scrollPageIndexValue) => {
+        this.scrollPageIndexValue.removeAllListeners()
 		this.scrollPageIndexValue = scrollPageIndexValue
 		this.shouldHandlerAnimationValue = false
+        this.addScrollPageIndexListener()
 		this.forceUpdate()
 	}
+
+    addScrollPageIndexListener = () => {
+        this.scrollPageIndexValue.addListener(({value}) => {
+            this.scrollPageIndex = value
+        })
+    }
 
 	componentWillUnmount() {
 		this.scrollPageIndexValue.removeAllListeners()
@@ -68,10 +82,15 @@ export default class HTPageHeaderView extends Component {
 		if (fontScale == 1) {
 			fontScale = 1.0001
 		}
-		const scale = this.scrollPageIndexValue.interpolate({
+		let scale = this.scrollPageIndexValue.interpolate({
             inputRange: [index - 2, index - 1, index, index + 1, index + 2],
             outputRange: [1, 1, fontScale, 1, 1]
         })
+        const enabled = this.itemConfigList[index]._animtedEnabledValue
+        scale = Animated.add(
+            Animated.multiply(scale, enabled),
+            Animated.multiply(1, Animated.subtract(1, enabled))
+        )
         const normalColor = this.itemTitleNormalStyle.color
         const selectedColor = this.itemTitleSelectedStyle.color
 		let titleStyle = {
@@ -102,14 +121,17 @@ export default class HTPageHeaderView extends Component {
 				return
 			}
 		}
+        this.itemConfigList.map((item, _index) => {
+            item._animtedEnabledValue.setValue((_index == index || _index == this.scrollPageIndex) ? 1 : 0)
+        })
 		if (this.shouldHandlerAnimationValue) {
 			this._animation(this.scrollPageIndexValue, index, this.props.selectedPageIndexDuration, true)
 		}
-		this.props.onSelectedPageIndex(index)	
+		this.props.onSelectedPageIndex(index)    
 	}
 
 	_renderItem = (item, index) => {
-		let content = this?.props?.renderItem != null ? this.props.renderItem(item, index) : this._renderTitle(item, index)
+		let content = this?.props?.renderItem != null ? this.props.renderItem(item, index, this._itemTitleProps(item, index)) : this._renderTitle(item, index)
 		return (
 			<Pressable key={index} style={this.itemContainerStyle} onLayout={(event) => this.cursor?._onLayoutItemContainer(event, item, index)} onPress={() => this._itemDidTouch(item, index)}>
 			{
@@ -137,6 +159,7 @@ export default class HTPageHeaderView extends Component {
 
 	shouldComponentUpdate(nextProps, nextState) {
 		if (nextProps.data != this.props.data) {
+            this.itemConfigList = nextProps.data.map(item => {})
 			return true
 		}
 		return false

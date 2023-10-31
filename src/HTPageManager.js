@@ -1,31 +1,37 @@
 import React, { Component } from 'react'
 import HTPageHeaderView from './HTPageHeaderView'
 import HTPageContentView from './HTPageContentView'
+import PropTypes from 'prop-types'
 
 export default class HTPageManager {
 
-	constructor(data, didSelectedPageIndex) {
-		this.pageIndex = -1
-		this.data = data
-		this.didSelectedPageIndex = (pageIndex) => {
-			didSelectedPageIndex && didSelectedPageIndex(pageIndex)
-		}
-	}
+    static propTypes = {
+        data: PropTypes.array,
+        initialScrollIndex: PropTypes.number,
+        onSelectedPageIndex: PropTypes.func,
+    }
 
-	_onSelectedPageIndex = (pageIndex, props) => {
-		this.contentView?.scrollPageIndex(pageIndex)
-		props?.onSelectedPageIndex && props.onSelectedPageIndex(pageIndex)
-		// this.didSelectedPageIndex && this.didSelectedPageIndex(pageIndex)
-	}
+    static defaultProps = {
+        data: [],
+        initialScrollIndex: 0,
+        onSelectedPageIndex: () => {}
+    }
+
+    constructor(props) {
+        this.props = props
+    }
 
 	renderHeaderView = (props) => {
 		return (
 			<HTPageHeaderView 
 				ref={ref => this.headerView = ref}
-				data={this.data}
+				{...this.props}
 				{...props}
 				onSelectedPageIndex={(pageIndex) => {
-					this._onSelectedPageIndex(pageIndex, props)
+                    // content.listener will call manager.props.onSelectedPageIndex
+					this.contentView?.scrollPageIndex(pageIndex)
+                    // call header.props.onSelectedPageIndex
+                    props?.onSelectedPageIndex && props.onSelectedPageIndex(pageIndex)
 				}}
 			/>
 		)
@@ -35,7 +41,7 @@ export default class HTPageManager {
 		return (
 			<HTPageContentView 
 				ref={ref => this.contentView = ref} 
-				data={this.data}
+				{...this.props}
 				{...props}
 				onInitScrollPageIndexValue={(scrollPageIndexValue) => {
 					this.headerView && this.headerView.bindScrollPageIndexValue(scrollPageIndexValue)
@@ -43,7 +49,8 @@ export default class HTPageManager {
 						let willReloadPageIndex = Math.round(value)
 						if (willReloadPageIndex != this.pageIndex) {
 							this.pageIndex = willReloadPageIndex
-							this.didSelectedPageIndex(this.pageIndex)
+                            // content.listener call manager.props.onSelectedPageIndex
+							this.props.onSelectedPageIndex(this.pageIndex)
 						}
 					})
 				}}

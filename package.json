@@ -9,7 +9,7 @@
   },
   "files": {
     "android",
-    "./index.js",
+    "index.js",
     "ios",
     "src",
     "react-native-selected-page.podspec"

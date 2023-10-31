@@ -10,7 +10,7 @@ export default class HTPagContentView extends Component {
 	static propTypes = {
 		data: PropTypes.array,
 		renderItem: PropTypes.func,
-        selectedPageIndexDuration: PropTypes.boolean,
+        shouldSelectedPageAnimation: PropTypes.bool
 	}
 
 	static defaultProps = {

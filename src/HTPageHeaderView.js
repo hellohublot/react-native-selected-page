@@ -35,6 +35,7 @@ export default class HTPageHeaderView extends Component {
 
 	constructor(props) {
 		super(props)
+        this.nextScrollPageIndex = -1
         const scrollPageIndex = this.props.initialScrollIndex ?? 0
         this.scrollPageIndex = scrollPageIndex
 		this.scrollPageIndexValue = new Animated.Value(scrollPageIndex)
@@ -60,6 +61,11 @@ export default class HTPageHeaderView extends Component {
 
     addScrollPageIndexListener = () => {
         this.scrollPageIndexValue.addListener(({value}) => {
+            if (this.nextScrollPageIndex == value) {
+                this.itemConfigList.map((item, _index) => {
+                    item._animtedEnabledValue.setValue(1)
+                })
+            }
             this.scrollPageIndex = value
         })
     }
@@ -121,6 +127,7 @@ export default class HTPageHeaderView extends Component {
 				return
 			}
 		}
+        this.nextScrollPageIndex = index
         this.itemConfigList.map((item, _index) => {
             item._animtedEnabledValue.setValue((_index == index || _index == this.scrollPageIndex) ? 1 : 0)
         })

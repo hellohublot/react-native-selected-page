@@ -21,7 +21,7 @@ Try the live demo on Snack Expo: **[https://snack.expo.dev/@hublot/react-native-
 ## 📦 Installation
 
 ```bash
-yarn add https://github.com/hellohublot/react-native-selected-page.git
+yarn add react-native-selected-page@https://github.com/hellohublot/react-native-selected-page.git
 ```
 
 ## 🎯 Basic Usage

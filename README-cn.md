@@ -1,6 +1,6 @@
 # 中文文档
 
-[English](#./README.md) | 中文
+[English](./README.md) | 中文
 
 一个**高性能、高度可定制**的 React Native 选项卡/页面组件，具有流畅的动画和灵活的样式选项。使用 `react-native-reanimated` 构建，确保原生性能。
 

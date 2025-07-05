@@ -297,7 +297,11 @@ Tab.Page = function TabPage<T>({
       data={data}
       keyExtractor={(_, i) => String(i)}
       {...props}
-      renderItem={(info) => <View style={{ width: pageWidth }}>{props.renderItem(info)}</View>}
+      renderItem={(info) => <View style={{ width: pageWidth }}>{}</View>}
+      getItemLayout={(
+        _,
+        index,
+      ) => ({length: pageWidth, offset: pageWidth * index, index})}
       onLayout={event => {
         setPageWidth(event.nativeEvent.layout.width)
         props?.onLayout?.(event)

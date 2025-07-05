@@ -1,32 +1,32 @@
-# React Native Selected Page
+# 中文文档
 
-English | [中文](./README-cn.md)
+[English](#./README.md) | 中文
 
-A **high-performance, highly customizable** React Native tab/page component with smooth animations and flexible styling options. Built with `react-native-reanimated` for native performance.
+一个**高性能、高度可定制**的 React Native 选项卡/页面组件，具有流畅的动画和灵活的样式选项。使用 `react-native-reanimated` 构建，确保原生性能。
 
-## ✨ Features
+## ✨ 特性
 
-- 🚀 **High Performance**: Smooth animations even with heavy computations in pages
-- 🎨 **Highly Customizable**: Separate Header and Page components with full control
-- 🔧 **Flexible Indicator**: Custom indicator animations and styling
-- 📱 **Native Feel**: Uses `react-native-reanimated` for 60fps animations
-- 🎯 **TypeScript Support**: Full TypeScript support with type definitions
-- 🔄 **Gesture Support**: Smooth pan gestures and scroll interactions
-- 💎 **Clean API**: Simple and intuitive component structure
+- 🚀 **高性能**: 即使页面中有大量计算，动画依然流畅
+- 🎨 **高度可定制**: 分离的 Header 和 Page 组件，完全控制
+- 🔧 **灵活指示器**: 自定义指示器动画和样式
+- 📱 **原生体验**: 使用 `react-native-reanimated` 实现 60fps 动画
+- 🎯 **TypeScript 支持**: 完整的 TypeScript 支持和类型定义
+- 🔄 **手势支持**: 流畅的平移手势和滚动交互
+- 💎 **简洁 API**: 简单直观的组件结构
 
-## 🚀 Demo
+## 🚀 演示
 
-Try the live demo on Snack Expo: **[https://snack.expo.dev/@hublot/react-native-selected-page](https://snack.expo.dev/@hublot/react-native-selected-page)**
+在 Snack Expo 上试用在线演示：**[https://snack.expo.dev/@hublot/react-native-selected-page](https://snack.expo.dev/@hublot/react-native-selected-page)**
 
-## 📦 Installation
+## 📦 安装
 
 ```bash
 yarn add https://github.com/hellohublot/react-native-selected-page.git
 ```
 
-## 🎯 Basic Usage
+## 🎯 基本用法
 
-<img src="./1.gif" width="300" alt="Basic Usage">
+<img src="./1.gif" width="300" alt="基本用法">
 
 ```tsx
 import React from 'react';
@@ -59,9 +59,9 @@ export default function App() {
 }
 ```
 
-## 🎨 Advanced Customization
+## 🎨 高级定制
 
-<img src="./2.gif" width="300" alt="Advanced Customization">
+<img src="./2.gif" width="300" alt="高级定制">
 
 ```tsx
 function Page({item}) {
@@ -190,13 +190,13 @@ export default function AdvancedApp() {
 }
 ```
 
-## 🔥 High Performance Demo
+## 🔥 高性能演示
 
-Even with heavy computations in page components, animations remain smooth:
+即使在页面组件中有大量计算，动画依然保持流畅：
 
 ```tsx
 function HighPerformancePage({ item }) {
-  // Intensive computation that would normally block UI
+  // 密集计算，通常会阻塞 UI
   for (let i = 0; i < 50000000; i++) {
     i += 1;
   }
@@ -204,52 +204,52 @@ function HighPerformancePage({ item }) {
   return (
     <View style={{ flex: 1, backgroundColor: item.backgroundColor }}>
       <Text style={{ fontSize: 20, textAlign: 'center', marginTop: 50 }}>
-        🚀 Smooth Animation Even With Heavy Computation!
+        🚀 即使有大量计算，动画依然流畅！
       </Text>
       <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 20 }}>
-        This page ran 50 million iterations but animations stay fluid
+        这个页面运行了 5000 万次迭代，但动画保持流畅
       </Text>
     </View>
   );
 }
 
-// Usage
+// 使用方式
 <Tab.Page
   renderItem={({ item }) => <HighPerformancePage item={item} />}
 />
 ```
 
-## 📖 API Reference
+## 📖 API 参考
 
-### Tab Component
+### Tab 组件
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `data` | `Array<any>` | Array of page data objects |
-| `children` | `React.ReactNode` | Tab.Header and Tab.Page components |
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| `data` | `Array<any>` | 页面数据对象数组 |
+| `children` | `React.ReactNode` | Tab.Header 和 Tab.Page 组件 |
 
-### Tab.Header Component
+### Tab.Header 组件
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `indicatorWidth` | `number` | `1` | Width of indicator (0-1 for percentage, >1 for fixed width) |
-| `itemNormalStyle` | `TextStyle` | `{}` | Style for normal tab items |
-| `itemSelectedStyle` | `TextStyle` | `{}` | Style for selected tab items |
-| `indicatorStyle` | `ViewStyle` | `{}` | Style for the indicator |
-| `renderItem` | `Function` | `undefined` | Custom render function for tab items |
-| `renderIndicator` | `Function` | `undefined` | Custom render function for indicator |
-| `style` | `ViewStyle` | `{}` | Style for the header container |
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `indicatorWidth` | `number` | `1` | 指示器宽度（0-1 为百分比，>1 为固定宽度） |
+| `itemNormalStyle` | `TextStyle` | `{}` | 普通标签项样式 |
+| `itemSelectedStyle` | `TextStyle` | `{}` | 选中标签项样式 |
+| `indicatorStyle` | `ViewStyle` | `{}` | 指示器样式 |
+| `renderItem` | `Function` | `undefined` | 自定义标签项渲染函数 |
+| `renderIndicator` | `Function` | `undefined` | 自定义指示器渲染函数 |
+| `style` | `ViewStyle` | `{}` | 头部容器样式 |
 
-### Tab.Page Component
+### Tab.Page 组件
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `renderItem` | `Function` | Function to render each page |
-| `...FlatListProps` | `any` | All FlatList props are supported |
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| `renderItem` | `Function` | 渲染每个页面的函数 |
+| `...FlatListProps` | `any` | 支持所有 FlatList 属性 |
 
-## 🎭 Customization Examples
+## 🎭 定制化示例
 
-### Custom Indicator
+### 自定义指示器
 
 ```tsx
 <Tab.Header
@@ -263,14 +263,14 @@ function HighPerformancePage({ item }) {
           backgroundColor: 'orange',
           borderRadius: 1.5,
         },
-        // Add your custom animation logic here
+        // 在这里添加你的自定义动画逻辑
       ]}
     />
   )}
 />
 ```
 
-### Separated Header and Page
+### 分离的 Header 和 Page
 
 ```tsx
 <View style={{ flex: 1 }}>
@@ -278,7 +278,7 @@ function HighPerformancePage({ item }) {
     <Tab.Header />
   </Tab>
   
-  {/* Custom content in between */}
+  {/* 中间的自定义内容 */}
   <View style={{ height: 50, backgroundColor: '#f0f0f0' }} />
   
   <Tab data={PAGES}>
@@ -287,16 +287,14 @@ function HighPerformancePage({ item }) {
 </View>
 ```
 
-## 🤝 Contributing
+## 🤝 贡献
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+欢迎贡献！请随时提交 Pull Request。
 
-## 📄 License
+## 📄 许可证
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+本项目采用 Apache License 2.0 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
 
-## 👨‍💻 Author
+## 👨‍💻 作者
 
 **hellohublot** - [hellohublot@gmail.com](mailto:hellohublot@gmail.com)
-
----

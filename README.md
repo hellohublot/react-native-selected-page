@@ -64,10 +64,9 @@ export default function App() {
 <img src="./2.gif" width="300" alt="Advanced Customization">
 
 ```tsx
+import MaskedView from '@react-native-masked-view/masked-view'
+
 function Page({item}) {
-  for (let i = 0; i < 500000; i ++) {
-    i += 1;
-  }
   return (
     <View
       style={{
@@ -147,7 +146,6 @@ function CustomHeader() {
   return (
     <Tab.Header 
       style={{ backgroundColor: 'white' }}
-      contentContainerStyle={{ paddingHorizontal: 0 }}
       itemNormalStyle={{ color: 'turquoise', paddingHorizontal: 10, fontSize: 15 }}
       renderIndicator={() => null}
       renderList={(value) => (
@@ -156,7 +154,7 @@ function CustomHeader() {
           <Animated.View pointerEvents="none" style={indicatorStyle} />
           <View pointerEvents="none" style={StyleSheet.absoluteFill}>
             <MaskedView pointerEvents="none" style={[StyleSheet.absoluteFill, {flexDirection: 'row', backgroundColor: 'transparent' }]} maskElement={(
-              <View pointerEvents="none" style={[StyleSheet.absoluteFill, { flexDirection: 'row', backgroundColor: 'transparent' }]}>
+              <View pointerEvents="none" style={[StyleSheet.absoluteFill, { flexDirection: 'row', backgroundColor: 'transparent', paddingHorizontal: 10 }]}>
                 {value}
               </View>
             )}>

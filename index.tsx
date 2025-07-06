@@ -265,7 +265,6 @@ Tab.Page = function TabPage<T>({
     if (
       headerScrollRef.current &&
       headerItemLayouts[index]?.width &&
-      headerItemLayouts[index]?.left &&
       pageWidth
     ) {
       if (index == currentIndex.value) {
